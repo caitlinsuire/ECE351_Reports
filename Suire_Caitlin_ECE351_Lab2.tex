@@ -1,0 +1,226 @@
+% Packages
+
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
+% Title
+
+\title{\myfont \textbf{ ECE 351 - 53 \\ \bigskip Lab 2 - User-Defined Functions}} 
+\vskip 1.0in
+\author{Caitlin Suire}
+\date{January 26, 2021}   % Was having trouble formatting title page but this                             %  seems to work for me
+
+% Header
+
+\fancyhead[R]{Caitlin Suire}
+\fancyhead[L]{Lab 2}
+
+\thispagestyle{plain}
+\pagestyle{fancy}
+
+% Start of Document
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\pagebreak
+
+
+\section{Introduction}
+
+The purpose of this lab is to learn Python using the Anaconda application, Spyder. We demonstrated the functions such as time-shifting, time scaling, time reversal, signal addition, and discrete differentiation using plots. 
+
+\section{Equations}
+
+Part 2 - Task 1 Equation: \\
+
+$ y(t) = r(t) - r(t-3) + 5u(t-3) -2u(t-6) -2r(t-6) $ \\
+
+\noindent This equation was derived in Part 2 to model the step and ramp functions shown on the plots in the results section with the code shown in the methodology section. 
+
+\section{Methodology}
+In this section, the code will be shown and explained using functions for each part.\\
+
+\noindent For part 1 of this lab, we imported the numpy and math plot libraries into Python in order to use the correct functions. We used the example code given to us in the lab handout as a resource for plotting the cosine function with enough step sizes to produce a good resolution graph. \\ 
+This code is given below: \\
+
+\indent def func1(t):\\         % Best way I found to show code on report
+\indent \indent y = np.zeros(t.shape)\\
+    
+    \indent \indent for i in range(len(t)):\\
+        \indent \indent \indent if i < (len(t) + 1)/3:\\ % Error here for sign <
+          \indent \indent  \indent \indent y[i] = t[i]**2\\
+       \indent \indent \indent else:\\
+           \indent \indent \indent \indent y[i] = np.sin(5*t[i])+2\\
+    \indent \indent return y \\
+    
+
+\noindent Part 2 of this lab calls for plotting of step and ramp functions. These were plotted with the following code corresponding with the ramp and step equation in the Equations section of this report: \\
+
+\indent def ramp(t):\\
+    \indent \indent y = np.zeros((len(t),1))\\
+    
+    \indent \indent for i in range(len(t)):\\
+        \indent \indent \indent if t[i] >= 0:\\
+            \indent \indent \indent \indent y[i] = t[i]\\
+        \indent \indent \indent else: \\
+            \indent \indent \indent \indent y[i] = 0\\
+    \indent \indent return y\\
+    
+\indent def step(t):\\
+    \indent \indent y = np.zeros((len(t),1))\\
+    
+    \indent \indent for i in range(len(t)):\\
+        \indent \indent \indent if t[i] >= 0:\\
+            \indent \indent \indent \indent y[i] = 1\\
+        \indent \indent \indent else:\\
+            \indent \indent \indent \indent y[i] = 0\\
+    \indent \indent return y\\
+
+\noindent Next we plotted the function given to us in the lab handout under "Function to Plot", also located in the results section of this report. The following code was another user-defined function to plot it from -5 to 10 seconds:\\
+
+\indent def func2(t):\\
+    \indent\indent return (ramp(t) - ramp(t-3) + 5*step(t-3) - 2*step(t-6) - 2*ramp(t-6))\\
+
+\indent steps = 1e-3\\
+\indent t = np.arange(-5, 10+steps, steps)\\
+\indent y=func2(t)\\
+
+\indent plt.figure(figsize = (10,7))\\
+\indent plt.plot(t, y)\\
+\indent plt.grid()\\
+\indent plt.xlabel('t')\\
+\indent plt.ylabel('y')\\
+\indent plt.title('Part 3 - Plotting Function')\\
+\indent plt.ylim([-2,10])\\
+\indent plt.xsticks([-5,0,1,2,3,4,5,6,7,8,9,10])\\
+\indent plt.ysticks([-5,0,1,2,3,4,5,6,7,8,9,10])\\
+\indent plt.show()\\
+
+\noindent These plotting commands were used repeatedly to produce all of the plots for this lab. They were manipulated a certain way to get the results we wanted. \\
+
+\noindent Part 3 of this lab asks to test the equation derived in part 2 by using it for time-shifting and scaling operations. The following code shows an excerpt from the code used to plot these functions: \\
+
+ steps = 1e-3\\
+\indent t = np.arange(-10, 8+steps, steps)\\
+\indent y = func2(-t)\\
+
+\indent plt.figure(figsize=(10,7))\\
+\indent plt.plot(t, y)\\
+\indent plt.grid()\\
+\indent plt.xlabel('t')\\
+\indent plt.ylabel('y(t)')\\
+\indent plt.title('Time Reversal Plot')\\
+\indent plt.ylim([-2,10])\\
+\indent plt.xticks([-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,5])\\
+\indent plt.yticks([-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10])\\
+\indent plt.show()\\
+
+\noindent Different manipulations were made to graph each of these plots, but this format was the same throughout. The ticks and axes were changed along with labeling. \\
+
+\noindent The derivative of the time reversal plot was hand-drawn for this section in the results portion of this report. 
+
+\newpage
+\section{Results}
+All of the code and plots worked for the entirety of this lab. Below are the plots for each section described in the methodology section above.  
+
+\subsection{Part 1}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Part 1 - Task 2 Cosine Function.png}
+\caption{Task 2 - Cosine Function}
+\end{center}
+\end{figure}
+
+\subsection{Part 2}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=4in]{Lab 2 Photos/Part 2 - Task 2 Ramp Function.png}
+\caption{Task 2 - Ramp Function}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=4in]{Lab 2 Photos/Part 2 - Task 2 Step Function.png}
+\caption{Task 2 - Step Function}
+\end{center}
+\end{figure}
+
+\newpage
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=4in]{Lab 2 Photos/Part 2 - Task 3 Plotting Function.png}
+\caption{Task 3 - Function to Plot}
+\end{center}
+\end{figure}
+\clearpage
+
+\newpage
+\subsection{Part 3}  % Extremely hard figuring out image sizing for it to fit
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Lab 2 Photos/Part 3 - Task 1 Time Reversal Plot.png}
+\caption{Task 1 - Time Reversal Plot}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Lab 2 Photos/Part 3 - Task 2 Time shift Operations.png}
+\caption{Task 2 - Time Shift Operations Plot}
+\end{center}
+\end{figure}
+\clearpage
+
+\newpage
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Lab 2 Photos/Part 3 - Task 3 Time Scaling Operations.png}
+\caption{Task 3 - Time Scale Operations Plot}
+\end{center}
+\end{figure}
+
+%%%% Insert hand-drawn derivative here
+\newpage
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Lab 2 Photos/Part 3 - Task 4 Derivative Graph.jpg}
+\caption{Task 4 - Hand-Drawn Derivative Graph}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Lab 2 Photos/Part 3 - Task 5 Derivative Plot.png}
+\caption{Task 5 - Derivative Plot}
+\end{center}
+\end{figure}
+\clearpage
+
+\newpage
+\section{Error Analysis}
+ There were a few errors with formatting and equations to use for the plots. Not knowing Python or having a huge coding background caused the most problems. This was difficult to understand the example code and implement my own without too much help. All of the plots worked as they were supposed to, so there were no other errors. 
+
+\section{Questions}
+Plots from Part 3 Task 4 and Part 3 Task 5 are not identical. The correlation changes between these plots by a factor of 3. The step size within the time variable could be changed by this factor as well because when hand-drawing, the derivative graph ends at 15 seconds instead of 5 seconds. \\
+
+\noindent Clarity of lab tasks was easy to understand and perform. The expectations and deliverables were clear for this lab, however the deliverables being at the beginning of the lab handout made it confusing to read when trying to perform the lab. 
+
+\section{Conclusion}
+This lab was fairly easy to conduct. This was a long lab, considering the amount of learning it took. For the future, this lab should be shorter with fewer plots to understand how things work. The sample code was a huge help, but maybe more should be included. In the next few labs, I will look over Python shortcuts and cheat sheets so that I am better prepared for what is to come for the remainder of the semester. 
+
+\end{document}
+
