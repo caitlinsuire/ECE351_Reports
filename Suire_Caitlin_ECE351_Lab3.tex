@@ -1,0 +1,203 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       %
+%  Caitlin Suire        %
+%  ECE 351-53           %
+%  Lab 3                %
+%  February 2, 2021     %
+%                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Packages
+
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
+% Title
+
+\title{\myfont \textbf{ ECE 351 - 53 \\ \bigskip Lab 3 - Discrete Convolution}}
+\vskip 1.0in
+\author{Caitlin Suire}
+\date{February 2, 2021}   
+
+% Header
+
+\fancyhead[R]{Caitlin Suire}
+\fancyhead[L]{Lab 3}
+
+\thispagestyle{plain}
+\pagestyle{fancy}
+
+% Start of Document
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\pagebreak
+
+
+\section{Introduction}
+The purpose of this lab is to become familiar with convolution and its properties using Python. The functions derived in Lab 2 were implemented here to graph these convolutions. 
+
+\section{Equations}
+We used the same ramp and step functions as the last lab to implement and graph the functions given in the lab handout. These are presented in the methodology section of this report. 
+
+\section{Methodology}
+\subsection{Part 1}
+For the first part of this lab, we used the step and ramp functions from Lab 2 to write functions to use in the rest of this lab.  We created the following signals with user-defined functions. \[f_1(t) = u(t-2) - u(t-9)\] \[f_2(t) = e^-^t u(t)\] \[f_3(t) = r(t-2)[u(t-2)-u(t-3)] + r(4-t)[u(t-3) - u(t-4)]\]
+This was done using the following code:\\
+
+\indent def stepfunc(t):\\
+\indent\indent    y = np.zeros(t.shape)\\
+    
+\indent\indent    for i in range(len(t)):\\
+\indent\indent\indent        if t[i] >= 0:\\
+\indent\indent\indent\indent            y[i] = 1\\
+\indent\indent\indent        else:\\
+\indent\indent\indent\indent            y[i] = 0\\
+\indent\indent    return y\\
+    
+\indent def rampfunc(t):\\
+\indent\indent    y = np.zeros(t.shape)\\
+    
+\indent\indent    for i in range(len(t)):\\
+\indent\indent\indent        if t[i] > = 0:\\
+\indent\indent\indent\indent            y[i] = t[i]\\
+\indent\indent\indent        else:\\
+\indent\indent\indent\indent            y[i] = 0\\
+\indent\indent    return y\\
+    
+\indent def f_1(t):\\
+\indent\indent $y = stepfunc(t-2) - stepfunc(t-9)$\\
+\indent\indent return y\\
+
+\indent def f_2(t):\\
+\indent\indent $y = np.exp(-t)*stepfunc(t)$\\
+\indent\indent return y\\
+
+\indent def f_3(t):\\
+\indent\indent $y = rampfunc(t-2)*(stepfunc(t-2)-stepfunc(t-3)) + rampfunc(4-t)*(stepfunc(t-3)-stepfunc(t-4))$\\
+\indent\indent return y\\
+
+\noindent Next, we plotted these three functions in a single figure from 0 to 20 seconds with time step shown below. The plots are in the results section of this report.\\
+
+\indent steps = 1e-3\\
+\indent t = np.arange(-1, 6+steps, steps)\\
+
+\indent y1 = f_1(t)
+
+\indent y2 = f_2(t)
+
+\indent y3 = f_3(t)\\
+
+   
+\indent plt.figure(figsize=(10,7))
+
+\indent plt.plot(t, y1, label = 'f_1(t)')
+
+\indent plt.plot(t, y2, label = 'f_2(t)')
+
+\indent plt.plot(t, y3, label = 'f_3(t)')
+
+\indent plt.xlabel('t')
+
+\indent plt.title('Function Plots')
+
+\indent plt.legend()
+
+\indent plt.grid()
+
+\indent plt.show()\\
+
+\subsection{Part 2}
+For the second part of this lab, we used the previous code from Task 1 to write our own code to perform the convolutions of these functions. The following code shows the convolution function for one of the three combinations asked to be plotted. \\
+
+\noindent def convfunc(f1, f2):
+
+\indent    Nf1 = len(f1)
+    
+\indent    Nf2 = len(f2)
+    
+\indent    f1Extended = np.append(f1, np.zeros((1, Nf2 -1)))
+    
+\indent    f2Extended = np.append(f2, np.zeros((1, Nf1 -1)))
+    
+\indent    result = np.zeros(f1Extended.shape)\\
+
+\indent    for i in range(Nf2 + Nf1 - 2):
+    
+\indent\indent        result[i] = 0
+        
+\indent\indent        for j in range(Nf1):
+        
+\indent\indent\indent            if(i - j + 1 > 0):
+            
+\indent\indent\indent\indent                try:
+                
+\indent\indent\indent                    result[i] += f1Extended[j]*f2Extended[i - j + 1]
+                    
+\indent\indent                except:
+                
+\indent\indent\indent                        print(i,j)
+                        
+\indent    return result\\
+    
+\noindent This was used three times to plot the figures in the results portion of this lab. The f1, f2, and f3's were switched to the desired convolutions needed to be performed. 
+
+\newpage
+
+\section{Results}
+The following plot is from Part 1 - Task 2:
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Part 1 - Task 2 Function Plots.png}
+\caption{Task 2 - Function Plots}
+\end{center}
+\end{figure}
+
+The following plots are from Part 2 - Task 2-3.\\
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Part 2 - Task 2 Conv12.png}
+\caption{Task 2 - Convolutions of $f_1$ and $f_2$}
+\end{center}
+\end{figure}
+
+\newpage
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Part 2 - Task 3 Conv23.png}
+\caption{Task 2 - Convolutions of $f_2$ and $f_3$}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Part 2 - Task 4 Conv13.png}
+\caption{Task 2 - Convolutions of $f_1$ and $f_3$}
+\end{center}
+\end{figure}
+
+\newpage
+\section{Error Analysis}
+\noindent One error I had during this lab was in the step function. My 'return y' line was not lined up with the correct line. I did not know this would cause an error, but it was fixed with the help of the TA. Another problem I had was plotting the functions on one graph but this was resolved easily after finding examples of this online. 
+
+\section{Questions}
+\noindent I worked alone for this lab. The only thing I collaborated on was the classmates in class that shared their screen with code they implemented as well as the TA's. I used this and last week's lab to plot my functions and debug any issues. The most difficult part of this lab was the convolutions because I did not understand them in lecture as well as I thought I did. For problem-solving, I went back and read through my code and made sure everything was lined up correctly. Some issues I could not figure out on my own, so I asked the TA for help during lab time. I approached writing the code with graphical convolution in mind because it is easier for me to picture while trying to code the functions. Lab tasks and expectations were clear and they are addressed in this report. 
+
+\section{Conclusion}
+\noindent Overall this lab was a success. The functions were easy to derive and use with the functions from Lab 2. Once figuring out the first function for the convolution, the other two combinations were easy to manipulate. 
+
+\end{document}
+
