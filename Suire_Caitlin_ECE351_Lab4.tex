@@ -1,0 +1,132 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       %
+%  Caitlin Suire        %
+%  ECE 351-53           %
+%  Lab 4                %
+%  Due Date: 2/16/21    %
+%                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Packages
+
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
+% Title
+
+\title{\myfont \textbf{ ECE 351 - 53 \\ \bigskip Lab 4 - System Step Responses Using Convolution}} 
+\vskip 1.0in
+\author{Caitlin Suire}
+\date{February 16, 2021}   
+
+% Header
+
+\fancyhead[R]{Caitlin Suire}
+\fancyhead[L]{Lab 4}
+
+\thispagestyle{plain}
+\pagestyle{fancy}
+
+% Start of Document
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\pagebreak
+
+
+\section{Introduction}
+The purpose of this lab is to become familiar with using convolution to compute the step response of a function. Using last week's functions, we plotted more to see how they function. 
+
+\section{Equations}
+
+
+\section{Methodology}
+For the first part of this lab, we created user-defined functions as given in the lab handout. This code is shown below.\\
+
+def $h_1(t)$:\\
+\indent \indent    y = np.exp(2*t) * stepfunc(1-t)\\
+\indent  \indent  return y\\
+
+def $h_2(t):$\\
+\indent   \indent y = stepfunc(t-2)-stepfunc(t-6)\\
+\indent   \indent return y\\
+
+def $h_3(t):$\\
+\indent   \indent y = np.cos(1.571*t)*stepfunc(t)\\
+\indent    \indent return y\\
+
+\noindent These functions were plotted on one figure shown in the results section of this report with subplots to distinguish each function. In the third figure, $ \omega_0 $ was calculated using the given $f_0 = 0.25 Hz$  \\
+
+\noindent For the second part of this lab, we plotted the step response using the convolution function created in the previous lab. This is shown in the results section of the report. \\
+\noindent Next, we calculated the step response of each of the transfer functions by solving the convolution integrals which are shown below. These results were plotted in the results section of the lab report.\\
+
+\[y_1(t)=h_1(t)*u(t)\]
+\[=\int\limits_{-\infty}^\infty e^{2\tau} u(1-\tau) u(t-\tau)d\tau\]
+\[=\int\limits_{-\infty}^t e^{2\tau} u(1-\tau)d\tau + \int\limits_{-\infty}^t e^{2\tau} u(t-\tau)d\tau\]
+\[=\int\limits_{-\infty}^t e^{2\tau} d\tau + \int\limits_{-\infty}^1 e^{2\tau} d\tau\]
+\[= \frac{1}{2} e^{2\tau} u(1-t) + e^2 u(t-1) \] \\
+
+\[y_2(t)=\int\limits_{-\infty}^\infty (u(\tau -2) - u(\tau -6))u(t-\tau)d\tau\]
+\[=\int\limits_{-\infty}^t (u(\tau -2)-u(\tau -6)d\tau \]
+\[=\int\limits_{-\infty}^t u(\tau -2)d\tau - \int\limits_{\infty}^t u(\tau -6)d\tau \]
+\[=\int\limits_{2}^t d\tau - \int\limits_{6}^t d\tau \]
+\[=(t-2)u(t-2) - (t-6)u(t-6)\] \\
+
+\clearpage 
+
+\[y_3(t)=\int\limits_{-\infty}^\infty cos(\omega_0 \tau ) u(\tau)u(t-\tau)d\tau\]
+\[=\int\limits_{-\infty}^t cos(\omega_0 \tau )u(\tau)d\tau\]
+\[=\int\limits_{0}^t cos(\omega_0 \tau )d\tau\]
+\[= \frac{1}{\omega_0}sin(\omega_0 t)u(t)\]
+
+\section{Results}
+The plot from the user-defined functions is below.
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{Part 1 - Task 2.png}
+\caption{Part 1 Task 2 - User-Defined Functions}
+\end{center}
+\end{figure}
+
+\noindent This was easy to plot with the given functions in the lab handout. Subplots were used to get these functions on the same figure. As you can see, the first function is exponential, the second is a step function, and the third is a cosine wave. \\
+
+\noindent The plot from the step response of the convolution functions is below.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{Part 2 - Task 1.png}
+\caption{Part 2 Task 1 - Step Response Functions}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{Part 2 - Task 2.png}
+\caption{Part 2 Task 2 - Calculated Step Responses}
+\end{center}
+\end{figure}
+\noindent These plots match the plots from the first part of this lab. This is showing that there are easier ways to plot and solve things without all of the extra work. 
+
+\clearpage
+\section{Error Analysis}
+\noindent  Errors in this lab were not made with the integrals and plots. The only trouble I had was getting the subplots to be all on one figure for conciseness. 
+
+\section{Questions}
+\noindent The lab handout was sufficient in providing the deliverables, tasks, and expectations for this lab. The TA also helped clear anything up that was apart of a coding issue. 
+
+\section{Conclusion}
+This lab was easy to implement. Using last week's functions, the plots were simple. Python has a way of showing that solving convolutions and integrals can be easy with the right tools, and that is what this class is all about. 
+
+\end{document}
