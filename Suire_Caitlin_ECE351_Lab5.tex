@@ -1,0 +1,92 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       %
+%  Caitlin Suire        %
+%  ECE 351-53           %
+%  Lab 5                %
+%  2/23/21              %
+%                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Packages
+
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
+% Title
+
+\title{\myfont \textbf{ ECE 351 - 53 \\ \bigskip Lab 5 - Step and Impulse Response of a RLC Bandpass Filter}} 
+\vskip 1.0in
+\author{Caitlin Suire}
+\date{February 23, 2021}   
+
+% Header
+
+\fancyhead[R]{Caitlin Suire}
+\fancyhead[L]{Lab 5}
+
+\thispagestyle{plain}
+\pagestyle{fancy}
+
+% Start of Document
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\pagebreak
+
+
+\section{Introduction}
+\noindent The purpose of this lab is to explore Laplace transforms. The previous labs showed convolutions with integrals, but we have since learned a new method that is much easier. We found the time-domain response of an RLC bandpass filter to impulse and step inputs. 
+
+\section{Equations}
+\noindent Final Value Theorem:
+\[\lim_{s\to 0} sH(s) = \lim_{s\to 0} \frac{\frac{1}{RC}s^2}{s^2 + \frac{1}{RC}s + \frac{1}{LC}} = \frac{0}{0+0+\frac{1}{LC}} = 0\]
+
+\section{Methodology}
+\noindent In the prelab, we solved for the impulse response of the given RLC bandpass circuit. Using this hand calculation, we implemented it as a function and graphed it compared to the embedded function for impulse responses. These plots are in the results section of this report. \\
+
+\noindent For the second part of the prelab, we found the step response using the embedded step response function in Python. Then we performed the final value theorem for the step response H(s)u(s) in the Laplace domain. The plot for this is included in the results section of this report and the theorem is in the equations section. 
+
+\newpage 
+\section{Results}
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{Part 1 - Task 1&2.png}
+\caption{Part 1 - Task 1 and 2}
+\end{center}
+\end{figure}
+\clearpage
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{Part 2 - Task 2.png}
+\caption{Part 2 - Task 2}
+\end{center}
+\end{figure}
+
+\noindent The plot in Part 2 matches the plot in Part 1. The shape is similar for the step response and makes sense for what we are trying to prove. There are different methods for solving different functions for a certain type of filter or circuit. 
+
+\section{Error Analysis}
+\noindent There are no significant errors in this lab. As long as the prelab was correct, then the functions worked without fault. Each of the plots were simple to implement with the practice we've had from previous labs. 
+
+\section{Questions}
+\noindent The Final Value Theorem shows that the limit from s to zero of sH(s) is zero. This value determines the steady state value of the circuit. With it being zero, this means that it has no initial conditions. This means that all transient components have decayed. Step functions are used when this occurs. \\
+
+\noindent The expectations were clear and concise for this lab with little confusion. 
+
+\section{Conclusion}
+\noindent Laplace transforms are easy to understand and work with. They make things simple for solving circuits and finding the impulse and step responses in a quick format. This lab showed that with having little code to produce the plots. 
+
+\end{document}
+
