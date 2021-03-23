@@ -1,0 +1,136 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       %
+%  Caitlin Suire        %
+%  ECE 351-53           %
+%  Lab 6                %
+%  3/2/21               %
+%                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Packages
+
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
+\usepackage[toc,page]{appendix} % Appendix for printed results 
+
+% Title
+
+\title{\myfont \textbf{ ECE 351 - 53 \\ \bigskip Lab 6 - Partial Fraction Expansion}} 
+\vskip 1.0in
+\author{Caitlin Suire}
+\date{March 2, 2021}   
+
+% Header
+
+\fancyhead[R]{Caitlin Suire}
+\fancyhead[L]{Lab 6}
+
+\thispagestyle{plain}
+\pagestyle{fancy}
+
+% Start of Document
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\pagebreak
+
+
+\section{Introduction}
+The purpose of this lab is to plot the step response found in the prelab and use the built-in Python functions to confirm our results. Partial fraction expansion takes a huge part in solving for these responses, therefore we are practicing using them in Python to help us better understand. This is used to make things easier when solving bigger functions with large numbers. 
+
+\section{Equations}
+\subsection{Part 1}
+\[H(s) = \frac{Y(s)}{X(s)} = \frac{s^2+6s+12}{s^2+10s+24} = \frac{s^2+6s+12}{(s+6)(s+4)}\]
+
+\subsection{Part 2}
+\[F(s) = H(s) * \frac{1}{s} = \frac{s^2+6s+12}{s(s+6)(s+4)} = \frac{A}{s} + \frac{B}{s+6} + \frac{C}{s+4} \]
+\[A = \frac{s^2+6s+12}{(s+6)(s+4)} |_s_=_0 = \frac{1}{2}\]
+\[B = \frac{s^2+6s+12}{s(s+4)} |_s_=_-_6 = 1\]
+\[C = \frac{s^2+6s+12}{s(s+6)} |_s_=_-_4 = -\frac{1}{2}\]
+\[F(s) = \frac{1/2}{s} + \frac{1}{s+6} + \frac{-1/2}{s+4}\]
+\[f(t) = [\frac{1}{2} + e^-^6^t - \frac{1}{2}e^-^4^t] u(t) \] 
+
+\section{Methodology}
+For the first part of this lab, we plotted the step response y(t) from the prelab results we obtained. Then, we plotted the H(s) function found in the prelab using the scipy.signal.step() command. These two plots were compared to see if our hand calculations were correct as shown in the results section of this lab report. Next, we used the residue function using scipy tools and printed the partial fraction expansion results. These were compared with the prelab results and made sure they agree. \\
+
+\noindent For the second part of this lab, we used the equation given to us in the lab handout to find the partial fraction expansion of the step response. This equation is given in the equations portion of this report. The results of the R, P, and K coefficients are attached as an appendix. Then we plotted the time-domain response using the cosine method. This result is in the results section of this report. Finally, we compared these results to the built-in scipy.signal.step() command to make sure they are identical. 
+
+\section{Results}
+\subsection{Part 1}
+The following plots are for the step response found by hand in the prelab and the comparison plot using the scipy.signal.step() command in Python. These plots are identical, making out calculations correct in the prelab. This derivation is shown in the equations portion of this report. 
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=4in]{Part 1 - Task 1.png}
+\caption{Part 1 - Task 1}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3.5in]{Part 1 - Task 2.png}
+\caption{Part 1 - Task 2}
+\end{center}
+\end{figure}
+
+\noindent Part 1 - Task 3:
+\noindent The partial fraction expansion results are attached to this report as an appendix. 
+\newline 
+
+\subsection{Part 2}
+\noindent The following plots use the equation given in the lab handout to solve using partial fraction expansion. We used the residue command and cosine method to plot this. 
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{Part 2 - Task 2,3.png}
+\caption{Part 2 - Task 2 and 3}
+\end{center}
+\end{figure}
+\clearpage 
+
+\section{Error Analysis}
+There was no error when creating these functions and plotting the results.
+
+\section{Questions}
+For a non-complex pole-residue term, you can still use the cosine method. This is because . The clarity of the expectations, instructions, and deliverables was sufficient. 
+
+\section{Conclusion}
+Python is a great tool for plotting functions. It is much easier to code these equations with large numbers instead of doing it by hand. This lab showed how simple it is to perform these computations. 
+
+\begin{appendices}
+\chapter{Part 1 - Task 3}
+
+Printed outcome of partial fraction expansion:\\
+
+\noindent [ 0.5 -0.5  1. ]\\
+\noindent [ 0. -4. -6.]\\
+\noindent [ ]
+
+\chapter{Part 2 - Task 1}
+
+Printed outcome of R, P, and K:\\
+
+\noindent r= [ 1.  -7.20391843e-17j -0.48557692+7.28365385e-01j\\
+ -0.48557692-7.28365385e-01j -0.21461963+0.00000000e+00j\\
+  0.09288674-4.76519337e-02j  0.09288674+4.76519337e-02j] \\
+  
+\noindent p= [  0. +0.j  -3. +4.j  -3. -4.j -10. +0.j  -1.+10.j  -1.-10.j]
+
+
+
+\end{appendices}
+
+\end{document}

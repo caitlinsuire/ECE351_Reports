@@ -1,0 +1,137 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       %
+%  Caitlin Suire        %
+%  ECE 351-53           %
+%  Lab 7                %
+%  3/23/21              %
+%                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Packages
+
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
+% Title
+
+\title{\myfont \textbf{ ECE 351 - 53 \\ \bigskip Lab 7 - Block Diagrams and System Stability}} 
+\vskip 1.0in
+\author{Caitlin Suire}
+\date{March 23, 2021}   
+
+% Header
+
+\fancyhead[R]{Caitlin Suire}
+\fancyhead[L]{Lab 7}
+
+\thispagestyle{plain}
+\pagestyle{fancy}
+
+% Start of Document
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\pagebreak
+
+
+\section{Introduction}
+The purpose of this lab is to become familiar with Laplace-domain block diagrams and use the factored form of the transfer function to judge system stability. 
+
+\section{Equations}
+Part 1 - Task 1 Equations:
+
+\[G(s) = \frac{(s+9)}{((s-8)(s+2)(s+4))}\]
+\[A(s) = \frac{(s+4)}{((s+3)(s+1))}\]
+\[B(s) = (s+12)(s+14)\]
+
+\noindent Part 1 - Task 3 Equation:
+\[H(s) = A(s)G(s) = \frac{(s+4)(s+9)}{(s+3)(s+1)(s-8)(s+4)(s+2)} = \frac{s+9}{(s+3)(s+1)(s-8)(s+2)}\]
+
+\noindent Part 2 - Task 1 Equation:
+\[H(s) = \frac{numA * numG}{(denG+numB*numG)denA}\]
+
+\noindent Part 2 - Task 2 Equation:
+\[H(s) = \frac{(s+9)(s+4)}{(s+5.16+9.52j)(s+5.16-9.52j)(s+6.18)(s+3)(s+1)}\]
+
+
+\section{Methodology}
+For the first part of this lab, we analyzed the block diagram by hand and learned how to use Python functions to perform the same analysis. First, we typed out G(s), A(s), and B(s) in factored form which is in the equations section of this report along with the poles and zeros of each function. Next, we used the scipy.signal.tf2zpk function to check these results which is in the results section of this report. \\
+
+\noindent Then, we typed the open-loop transfer function where x(t) is the input and y(t) is the output. This is in the equations section of this report in factored form. This equation was plotted and the scipy.signal.convolve function was used to expand the numerator and denominator of this transfer function. \\
+
+\noindent For the second part of this lab, we became more familiar with using Python for analyzing block diagrams and used closed-loop systems to achieve this. First, we typed the closed-loop equation for the transfer function which is in the equations section of this report. Then we used the scipy functions as in the first part of this lab to expand and find the numerical values for the total numerator and denominator. This is also included in the equations section of this report. This equation was plotted using the scipy step function and is in the results section. 
+
+\newpage
+\section{Results}
+
+Part 1 - Task 2 Output:\\
+
+Z of G:  [-9.]   \indent P of G:  [ 8. -4. -2.]\\
+\indent Z of A:  [-4.] \indent  P of A:  [-3. -1.]\\
+\indent Z of B:  [-14. -12.]\\
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{Part 1 - Task 5.png}
+\caption{Part 1 - Task 5}
+\end{center}
+\end{figure}
+\clearpage
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{Part 2 - Task 4.png}
+\caption{Part 2 - Task 4}
+\end{center}
+\end{figure}
+\clearpage
+
+
+\section{Error Analysis}
+I did not come across any errors in this lab and the deliverables were clear and straightforward. 
+
+\section{Questions}
+Part 1 - Task 4:\\
+
+The open-loop response is not stable since it has a pole (s - 8) in the right side of the real-imaginary plane. \\
+
+
+\noindent Part 1 - Task 6:\\
+
+Yes the results from Task 5 supports answer from Task 4 because it is not stable with a pole in the negative s-plane.\\
+
+\noindent Part 2 - Task 3:\\
+
+ The closed-loop response is stable because poles are in the positive s-plane.\\
+ 
+\noindent Part 2 - Task 5:\\
+
+Yes, my results from Task 4 support my answer from task 3 with it being stable because the poles are all in the positive s-plane.\\
+
+\noindent Other Questions:\\
+
+\noindent In Part 1 Task 5, convolving the factored terms using the scipy function result in the expanded form of the numerator and denominator because the convolving function takes both sets and outputs them as a linear convolution. This cannot be used in Lab 3 because the code was not in array format.  \\
+
+\noindent The different between open and closed loop systems from Part 1 to Part 2 is that the poles in the closed loop have complex numbers. The poles in the closed loop are also negative compared to the positive poles in the open-loop system. Stability differs for each case depending on the poles, as shown in the answers for Part 1 Task 4 and Part 2 - Task 3.\\
+
+\noindent The difference between the residue and tf2zpk scipy functions in this lab is that the residue function was used for partial fraction expansion and the other was for factoring and identifying the poles and zeros of the function. \\
+
+\noindent Is it possible for the open-loop system to be stable if all poles are in the same location within the plane. This was shown in the answer to Part 1 Task 4. Closed-loop systems can also be stable if all the poles are positive. 
+
+\section{Conclusion}
+Overall, this lab was easy to understand. It helped to illustrate what the block diagrams are doing and the equations that go along with them. This lab made it easier to understand Laplace-domain transfer functions. In the future, there does not need to be any changes to make this lab more simple. It was straightforward and allowed for little confusion to occur. 
+
+\end{document}
+
