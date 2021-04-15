@@ -1,0 +1,134 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       %
+%  Caitlin Suire        %
+%  ECE 351-53           %
+%  Lab 9                %
+%  3/30/21              %
+%                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Packages
+
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
+% Title
+
+\title{\myfont \textbf{ ECE 351 - 53 \\ \bigskip Lab 9 - Fast Fourier Transform}} 
+\vskip 1.0in
+\author{Caitlin Suire}
+\date{March 30, 2021}   
+
+% Header
+
+\fancyhead[R]{Caitlin Suire}
+\fancyhead[L]{Lab 9}
+
+\thispagestyle{plain}
+\pagestyle{fancy}
+
+% Start of Document
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\pagebreak
+
+
+\section{Introduction}
+The purpose of this lab is to become familiar with fast Fourier transforms using Python. This is a great way to visualize the Fourier transforms with different user-defined functions. 
+
+\section{Equations}
+There were no equations used for this lab. 
+
+\section{Methodology}
+This lab was straightforward with the plots used. First, we created our own Fast Fourier Transform (fft) routine as a user-defined function. This was used to graph the different signals given in the lab handout. To plot these, the magnitude, phase, frequency, and samplings were plotted in one figure. These are shown in the results section of this lab report. There are three different functions that were given, three functions that fix the readability with the magnitude less than 1e-10. The last plot was the Fourier series approximation used in Lab 8. This was done using the fft developed in Task 4 of this lab. These 7 figures with 5 subplots are shown in the results section of this lab report. 
+
+\section{Results}
+The following plots show the magnitued, phase, frequency, and samplings of the required functions given in the lab handout. 
+\clearpage
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Task 1.png}
+\caption{Task 1 Plot}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Task 2.png}
+\caption{Task 2 Plot}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=4in]{Task 3.png}
+\caption{Task 3 Plot}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=4in]{Task 4.png}
+\caption{Task 4 Plot}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=4in]{Task 5.png}
+\caption{Task 5 Plot}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=4in]{Task 6.png}
+\caption{Task 6 Plot}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=4in]{Task 7.png}
+\caption{Task 7 Plot}
+\end{center}
+\end{figure}
+
+\clearpage
+
+\section{Error Analysis}
+Errors that happened during this lab was figuring out how to plot all five subplots on one picture. This was pretty simple to figure out after looking at past labs because there are dimensions to the figure that you can manipulate. Another error that arose was the missing return line when creating the new fft to change the first three tasks to alter the quality. Other than those, the lab went smoothly. 
+
+\section{Questions}
+If fs is lower then the graphs are not as clear. Less data points are being recorded and the shape of the curve does not graph well. If it is higher, the graph is clearer with more points being graphed on the plot. Eliminating the small phase magnitudes also make the graph more clear. \\
+
+\noindent To verify our results from Task 1 and 2, we used Fourier transforms of cosine and sine. \\
+
+\noindent Task 1: $\frac{1}{2}(\delta(f+1)-\delta(f-1))$\\
+
+\noindent Task 2: $\frac{1}{2}(\delta(f+1)+\delta(f-1))$\\
+
+\noindent The equations above verify Tasks 1 and 2 because it gives the impulse $f_0$ from the given equation in the lab handout. The equation also shows that the magnitude is $\frac{1}{2}$ as shown in the graphs. \\
+
+
+\noindent The clarity of the lab tasks, expectations, and deliverables were clear and concise. There was little confusion when reading the lab handout. 
+
+\section{Conclusion}
+Overall, this lab was simple to complete. There are various advantages to Fourier transforms and this week proved that point. Seeing the graphs and working with the plots make things much more simpler than what we do in the lecture by hand. In the future, these tools can be used in the future to plot things more easily and picture it visually and accurately. 
+
+\end{document}
+

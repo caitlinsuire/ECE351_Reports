@@ -1,0 +1,118 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       %
+%  Caitlin Suire        %
+%  ECE 351-53           %
+%  Lab 11               %
+%  4/13/21              %
+%                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Packages
+
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\usepackage[toc,page]{appendix}
+
+% Title
+
+\title{\myfont \textbf{ ECE 351 - 53 \\ \bigskip Lab 11 - Z - Transform Operations}} 
+\vskip 1.0in
+\author{Caitlin Suire}
+\date{April 15, 2021}   
+
+% Header
+
+\fancyhead[R]{Caitlin Suire}
+\fancyhead[L]{Lab 11}
+
+\thispagestyle{plain}
+\pagestyle{fancy}
+
+% Start of Document
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\pagebreak
+
+
+\section{Introduction}
+The purpose of this lab is to analyze discrete systems using Python's built-in functions and a given function developed by Christopher Felton. 
+
+\section{Equations}
+The equations used in this lab were either given in the lab handout, or are listed in the methodology section of this report with the derivations needed. 
+
+\section{Methodology}
+The first step of this lab was to derive the transfer function from the given causal function and derive h[k] by partial fraction expansion. The following derivations show these steps: \\
+
+1. By hand, find H(z).
+\[ y[k] - 10y[k-1] + 16y[k-2] = 2x[k] - 40x[k-1]  \] 
+\[ Y(z) - 10[z^{-1}Y(z) + 0] + 16[z^{-2}Y(z) + 0z^{-1} + 0] = 2X(z) - 40[z^{-1}X(z) + 0] \] 
+\[ Y(z) - 10z^{-1}Y(z) + 16z^{-2}Y(z) = 2X(z) - 40z^{-1}X(z) \]
+\[ H(z) = \frac{Y(z)}{X(z)} = \frac{2 - 40z^{-1}}{1 - 10z^{-1} + 16z^{-2}} \] 
+\[ H(z) = \frac{2(1-20z^{-1})}{(1-8z^{-1})(1-2z^{-1})} \] \\
+
+2. By hand, find h[k] by partial fraction expansion.
+\[ H(z)\frac{z^2}{z^2} = \frac{2z(z-20)}{(z-8)(z-2)} \]
+\[ \frac{H(z)}{z} = \frac{2(z-20)}{(z-8)(z-2)} = \frac{A}{z-8} + \frac{B}{z-2} \]
+\[ A = \frac{2(z-20)}{z-2} |_{z=-8} = -4 \] 
+\[ B = \frac{2(z-20)}{z-8} |_{z=2} = 6 \]
+\[ \frac{H(z)}{z} = \frac{-4}{z-8} + \frac{6}{z-2} \]
+\[ H(z) = \frac{-4z}{z-8} + \frac{6z}{z-2} \]
+\[ h[k] = -4(8^k) u[k] + 6(2^k) u[k] \]\\
+
+
+\noindent Next we used the scipy.residuez() function to verify the partial fraction expansion. This is shown in the appendix of this report. For the fourth task, we used the provided zplane() function to obtain the pole-zero plot for the transfer function. This was simple to do because the code was provided and we only needed to plot the output. This graph is in the results section of this report. The last task was to use another Python built-in function called scipy.signal.freqz() to plot the magnitude and phase responses of the transfer function, H(z). This graph is in the results section of this report as well. 
+
+
+\section{Results}
+Figure 1 shows the graph for Task 4 which was using the zplane() function provided. 
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Task 4.png}
+\caption{Task 4 Plot}
+\end{center}
+\end{figure}
+
+\noindent  Figure 2 shows the graph for Task 5 which was using the frequency Python function to plot the magnitude and phase of the transfer function we derived.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Task 5.png}
+\caption{Task 5 Plot}
+\end{center}
+\end{figure}
+
+\section{Error Analysis}
+There were no errors made when conducting this lab. It was straightforward and similar to Laplace functions. The provided code helped graph the first graph
+
+\section{Questions}
+Looking at the plot generated in Task 4, H(z) is not stable. This is because the poles are not in the right half of the plane on the graph. 
+
+\section{Conclusion}
+This lab was one of the easiest so far. The graphs were simple to construct and we put all of the code we've already learned so far into this lab to produce the correct outputs. Clarity of the instructions and expectations were clear and there were no major errors of concern. Again, these labs help with visualizing plots and functions with Z-transforms. 
+
+\begin{appendices}
+\chapter{Task 3}
+
+Printed outputs for residue Python function: \\
+
+\noindent r=  [ 6. -4.] \indent p=  [2. 8.]\\
+
+\noindent z=  [20.] \indent p=  [8. 2.] \indent k=  0.125
+
+\end{appendices}
+
+\end{document}

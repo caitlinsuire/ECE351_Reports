@@ -1,0 +1,123 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       %
+%  Caitlin Suire        %
+%  ECE 351-53           %
+%  Lab 10               %
+%  4/6/21               %
+%                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Packages
+
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
+% Title
+
+\title{\myfont \textbf{ ECE 351 - 53 \\ \bigskip Lab 10 - Frequency Response}} 
+\vskip 1.0in
+\author{Caitlin Suire}
+\date{April 6, 2021}   
+
+% Header
+
+\fancyhead[R]{Caitlin Suire}
+\fancyhead[L]{Lab 10}
+
+\thispagestyle{plain}
+\pagestyle{fancy}
+
+% Start of Document
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\pagebreak
+
+
+\section{Introduction}
+The purpose of this lab is to become familiar with frequency response tools and Bode plots using Python. 
+
+\section{Equations}
+Transfer Function:
+\\ \[H(s) = \frac{\frac{1}{RC}s}{s^2 + \frac{1}{RC}s + \frac{1}{LC}}\] 
+
+\noindent Part 2 Signal:
+\[x(t) = \cos(2\pi * 100t) + \cos(2\pi * 3024t) + \sin(2\pi * 50000t) \] 
+
+
+\section{Methodology}
+The first part of the lab was to develop a frequency response from the RLC circuit and represent using Bode plots. We plotted the magnitude and phase of the transfer function given in the lab handout. This is shown in Figure 1 of the results section of this report. Then we used a pre-made function in the scipy package to plot the same magnitude and phase and compared the two. This is shown in Figure 2 of the results section of this report. Next we plotted the same transfer function but in Hertz instead of radians per second. This was done using the control package. This plot is shown in Figure 3 of the results section. \\
+
+\noindent  The second part of this lab was to use the frequency response of the first part of this lab as a filter for the multi-band input signal. First, we plotted the signal given and used another built-in function called scipy.signal.bilinear to convert to the z-domain. Then the scipy.signal.lfilter function was used to plot the input signal through the filter. Finally, the output signal was plotted over the same time period as in the first task of this part of the lab. Figure 4 and Figure 5 show these plots. 
+
+\newpage 
+\section{Results}
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Part 1 - Task 1.png}
+\caption{Part 1 - Task 1 Plot}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Part 1 - Task 2.png}
+\caption{Part 1 - Task 2 Plot}
+\end{center}
+\end{figure}
+
+\newpage 
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Part 1 - Task 3.png}
+\caption{Part 1 - Task 3 Plot}
+\end{center}
+\end{figure}
+
+\noindent The above plots show the transfer function being plotted in three different ways. They are all exactly the same, showing that it does not matter what method is used. 
+
+\clearpage 
+\newpage 
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Part 2 - Task 1.png}
+\caption{Part 2 - Task 1 Plot}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3in]{Part 2 - Task 4.png}
+\caption{Part 2 - Task 4 Plot}
+\end{center}
+\end{figure}
+
+\newpage 
+\section{Error Analysis}
+There were little errors in this lab for me. The control package worked with the setup we did at the beginning of the semester and the graphs worked out as planned. This lab was fairly simple and the clarity on expectations were concise. 
+
+\section{Questions}
+The filter and filtered output in Part 2 makes sense given the Bode plots from Part 1 because it has the same shape as a sine wave which is what we are looking for. \\
+
+\noindent The purpose of the scipy functions used in this lab are to transform different poles and zeros from s-domain to z-domain. We are now dealing with digital data instead of analog so these functions are a great way to convert the two. The scipy filter function also creates output signal responses as we saw in Part 2 of this lab. \\
+
+\noindent If you use a different sampling frequency in the bilinear scipy function than used for the time-domain signal, then the output signal is no longer a sine wave. Smaller frequencies will have a larger amplitude and larger frequencies will have inconsistent amplitudes. 
+
+\section{Conclusion}
+Bode plots are a great way to visually represent frequency gains and phases. It is easy to read and simple to understand with lecture material. This lab was straightforward and easy to visual with the given material. 
+
+\end{document}

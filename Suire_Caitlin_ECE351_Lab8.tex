@@ -1,0 +1,108 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       %
+%  Caitlin Suire        %
+%  ECE 351-53           %
+%  Lab #                %
+%  Date                 %
+%                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Packages
+
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\usepackage[toc,page]{appendix}
+
+% Title
+
+\title{\myfont \textbf{ ECE 351 - 53 \\ \bigskip Lab 8 - Fourier Series Approximation of a Square Wave}} 
+\vskip 1.0in
+\author{Caitlin Suire}
+\date{March 23, 2021}   
+
+% Header
+
+\fancyhead[R]{Caitlin Suire}
+\fancyhead[L]{Lab 8}
+
+\thispagestyle{plain}
+\pagestyle{fancy}
+
+% Start of Document
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\pagebreak
+
+
+\section{Introduction}
+The purpose of this lab is to approximate periodic time-domain signals. Using Python, we can graph these and see the results visually using Fourier Series. 
+
+\section{Equations}
+Task 1 Equations:
+
+\[a[k] = 0\]
+\[b[k] = 2/(k*np.pi)*(1-np.cos(k*np.pi))\] 
+
+
+\section{Methodology}
+First, we considered the square wave given in the lab handout. This is a real-value function that can be represented by the Fourier series. This equation is in the equations section of this report. To let Spyder solve the coefficients for us, we input the expressions for $a_k$ and $b_k$ as derived in the prelab. Then we used for loops to solve for $a_0$, $a_1$, $b_1$, $b_2$, and $b_3$. These were then displayed as numerical values which are in the appendix of this report. For the square wave plot given, we plotted the Fourier series approximation for N = {1, 3, 15, 50, 150, 1500}. We used T = 8 seconds to plot for time zero to twenty seconds.  
+
+\section{Results}
+The plots for the Fourier series approximation show that as you increase N, the approximation becomes more accurate. The plots are shown below.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{Part 1 Task 2.1.png}
+\caption{Approximation N = 1, 3, 15}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{Part 1 Task 2.2.png}
+\caption{Approximation N = 50, 150, 1500}
+\end{center}
+\end{figure}
+
+\clearpage
+
+\section{Error Analysis}
+This lab was simple and easy to understand with no errors. Previous labs helped to derive equations for this one and there were no issues. 
+
+\section{Questions}
+The function given, x(t) is an odd function because only the sine terms matter. The cosine terms go to zero when plugging in odd numbers. It's an asymmetrical function so only odd values have an effect. \\
+
+\noindent Based on my results from Task 1, I expect the values of $a_2$ through $a_n$ to also be zero. This is because $a_k$ was initially a cosine function making all the coefficients equal to zero. \\
+
+\noindent The approximation of the square wave changes as the value of N increases because it gets closer and closer to a perfect square wave. This is shown in the plots in the result section of the report as well. The Fourier series struggles to approximate the square wave because it is mostly used to approximate periodic signals that are harmonic. \\
+
+\noindent As the value of N increases, the Fourier series summation also increases. The larger the N, the better the approximation will be. 
+
+\section{Conclusion}
+The clarity of the lab tasks, expectations, and deliverables were simple to understand. They were concise and easy to follow with previous labs' equations. In the future, I would not change anything to this lab. It is a good way to understand the Fourier series graphically to relate it back to the long equations in the lecture. 
+
+\begin{appendices}
+\chapter{Part 1 - Task 1}
+Printed output for numerical values of the coefficients.
+
+\[ a0 =  [0.] \indent \indent a1 =  [0.]\]
+\[b1 =  [1.27323954] \indent b2 =  [0.] \indent b3 =  [0.42441318]\]
+
+
+\end{appendices}
+
+\end{document}
+
