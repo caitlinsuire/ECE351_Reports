@@ -1,0 +1,146 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       %
+%  Caitlin Suire        %
+%  ECE 351-53           %
+%  Lab 12               %
+%  Due: 5/8/21          %
+%                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Packages
+
+\documentclass[12pt]{report}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
+% Title
+
+\title{\myfont \textbf{ ECE 351 - 53 \\ \bigskip Lab 12 - Filter Design - Final Project}} 
+\vskip 1.0in
+\author{Caitlin Suire}
+\date{May 8, 2021}   
+
+% Header
+
+\fancyhead[R]{Caitlin Suire}
+\fancyhead[L]{Lab 12}
+
+\thispagestyle{plain}
+\pagestyle{fancy}
+
+% Start of Document
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+\pagebreak
+
+
+\section{Introduction}
+The purpose of this final project is to take all we have learned over the course of this semester in Python and apply the skills into a practical application. 
+
+\section{Equations}
+Transfer Function in Laplace:
+\[H(s) = \frac{ \frac{s}{RC} }{ s^2 + \frac{s}{RC}  +  \frac{1}{LC}  }\] 
+
+\noindent RLC in H(jw): 
+\[H(j\omega) = \frac{ \frac{j\omega}{RC} }{ \frac{j\omega}{RC} + \frac{1}{LC} - \omega^2}\] 
+
+\noindent Magnitude:
+\[ |H(j\omega)| = \frac{ \frac{\omega}{RC} }{ \sqrt{(\frac{1}{LC} - \omega^2)^2 + (\frac{\omega}{RC})^2  } } \] 
+
+\section{Methodology}
+The practical application used in this lab is to suppose we are working for an aircraft company on a positioning control system that controls the position of the landing for their aircraft. The positioning system requires a feedback signal from a position sensor. However, the noise on the sensor signal is producing inaccurate position readings that degrade the performance of the positioning system. From the position sensor data sheet given, we know the position measurement information. The boss also provides an oscilloscope capture of the sensor signal voltage which is shown below.\\
+
+\newpage 
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=4in]{Noise Input Signal.png}
+\caption{Noise Input Signal Provided}
+\end{center}
+\end{figure}
+
+\noindent The first task was to identify the noise magnitude and corresponding frequencies due to the low frequency vibration and switching amplifier. This information characterizes the main source noises (or position measurement information) as shown below. To do this, the fast Fourier transform function derived from previous labs. A spectrum of signals was created and is shown in Figure 4. \\
+
+\newpage 
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{Main Noise Sources.png}
+\caption{Position Measurement Information}
+\end{center}
+\end{figure}
+
+
+\noindent Next, we designed an analog filter circuit to remove the noise and only pass the position measurement information. The values of the passive components and transfer function are shown in the equations section of this report and included in the .py file that was turned in with this report. These values, as shown in the circuit below, were chosen based upon calculations also shown in the .py file. These are everyday values that can be easily accessible when building the circuit in real life. \\
+
+\newpage
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{RLC.PNG}
+\caption{Circuit Designed}
+\end{center}
+\end{figure}
+
+\noindent Then we generated Bode plots of the filter we designed and made sure that the design was demonstrated and done correctly. These plots were simple using critical points. This is shown in the results section in Figure 5.\\ 
+
+\noindent Finally, using Python, we filtered the noise sensor signal using the filter that was designed and demonstrated that the output signal has been correctly attenuated at the appropriate frequencies. We plotted the same signals as in Figure 4 but using the new transfer function that was designed with the circuit to create the after-signals in Figure 6. You can see that the signal becomes easier to read when broken down into low and high bands. Figure 7 shows the signal after being filtered. To do this, scipy signal functions were used to plot this, as demonstrated in previous labs. 
+
+\newpage
+
+\section{Results}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=2.6in]{Before Filter Spectrum Signals.png}
+\caption{Before Filter}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=3.8in]{Bode Plots.png}
+\caption{Bode Plots}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=4in]{After FIlter Spectrum Signals.png}
+\caption{After Filter Spectrum Signals}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=5in]{After Filter Signal.png}
+\caption{After Filter Signal}
+\end{center}
+\end{figure}
+\clearpage 
+
+\newpage 
+
+\section{Error Analysis}
+There was a lot of confusion with how to plot and how to use the makestem() function, but after googling ways and using the appendix provided, it was simple enough. There were not many functions needed to be derived for this project because most were used in previous labs. This was a fun way to connect all we have learned into one project at the end. 
+
+\section{Questions}
+%Personally, I want to learn more coding techniques and ways to format documents in a neater way.
+
+Earlier this semester, we were asked what we personally wanted to get out of taking this course and I said that I wanted to learn more coding techniques and ways to format neater documents. I feel that this goal was met because I learned how to code more than I ever thought I could, and learning LaTex helped me format documents in an easier way than Word, which is what I was used to. From now on, I will use Python to plot graphs because it is easier than drawing or formatting on other programs. I will also use LaTex for future reports because it is simplier and it uploads online so I do not have to worry about storage or losing my work. I filled out the course feedback survey and appreciate all the help. Thank you for the luck! 
+
+\section{Conclusion}
+Overall this lab was one of the most engaging. I could have my own choice with design and format and it was not as structured as the rest of the labs. This semester has prepared us for this project and the functions we have learned over the course of the semester came to good use. 
+
+\end{document}
